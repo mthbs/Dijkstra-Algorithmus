@@ -30,8 +30,8 @@ public class Startanalysis {
 	private NodeList nl;
 	public String[] NodesL;
 	public String[] EdgesL;
-	public String[][] Combo;
-	public String value = "F";
+	public int[][] Combo;
+	public int value = 0;
 	
 	//Buttonfileselection bfs= new Buttonfileselection(); 
 
@@ -105,7 +105,7 @@ public class Startanalysis {
 				NodeList nl1 = d.getElementsByTagName("edge");
 				NodesL = new String[nl.getLength()];
 				EdgesL = new String[nl1.getLength()];
-				Combo  = new String[nl.getLength()][nl.getLength()];
+				Combo  = new int[nl.getLength()][nl.getLength()];
 				
 				
 				for(int i = 0; i < nl.getLength(); i++)
@@ -152,7 +152,7 @@ public class Startanalysis {
 						    
 						    if(src == tgt) 
 						    {
-						    	Combo[i][j] = "0";
+						    	Combo[i][j] = 0;
 						    	
 						    }
 						    else 
@@ -232,13 +232,13 @@ public class Startanalysis {
 	}*/
 	
 		
-	public String ed(String x, String x1 , String x2)
+	public int ed(String x, String x1 , String x2)
 
 {  
 		
 		try {
 			
-	    String y1,y2;
+	    String y1,y2,svalue;
 		DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
         DocumentBuilder dB = dBF.newDocumentBuilder();
         Document d = dB.parse(x);
@@ -251,7 +251,8 @@ public class Startanalysis {
 		
         Node n1 = nl1.item(i1);
 	    Element lmnt1 = (Element) n1;
-	    value = lmnt1.getElementsByTagName("data").item(1).getTextContent();
+	    svalue = lmnt1.getElementsByTagName("data").item(1).getTextContent();
+	    value = Integer.parseInt(svalue);
 	    //Getting the weight of an edge between two nodes as String
 	    
 	    y1 = lmnt1.getAttribute("source");//The Source and the target Node as String
@@ -277,7 +278,7 @@ public class Startanalysis {
 	    	}
 	    	else 
 	    	{
-	    		value = "0";
+	    		value = 0;
 	    	}
 	    	
 	    	
@@ -285,7 +286,7 @@ public class Startanalysis {
 	    
 	    else 
 	    {
-	    	value = "0";
+	    	value = 0;
 	    }
 	    
 	    
