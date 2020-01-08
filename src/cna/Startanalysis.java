@@ -30,7 +30,7 @@ public class Startanalysis {
 	private JTextField textFieldGraphmlFile;
 	private JFrame frameStartAnalysis;
 	private JTextField textFieldSelectedPath;
-	private NodeList nl;
+	private NodeList NodesList;
 	public int[][] AdjacenceMatrix;
 	public int value = 0;
 	public String[] NodesL; //The NodesList as String with values like "n0,n1...."
@@ -87,23 +87,23 @@ public class Startanalysis {
 				
 				
 				
-				nl = d.getElementsByTagName("node");
-				NodeList el = d.getElementsByTagName("edge");
+				NodesList = d.getElementsByTagName("node");
+				NodeList EdgesList = d.getElementsByTagName("edge");
 				String convert = null;
-				NodesL = new String[nl.getLength()];
-				NodesLI = new int[nl.getLength()];
-				AdjacenceMatrix  = new int[nl.getLength()][nl.getLength()];
+				NodesL = new String[NodesList.getLength()];
+				NodesLI = new int[NodesList.getLength()];
+				AdjacenceMatrix  = new int[NodesList.getLength()][NodesList.getLength()];
 				
 				
-				for(int i = 0; i < nl.getLength(); i++)
+				for(int i = 0; i < NodesList.getLength(); i++)
 				{
-					Node n =nl.item(i);
+					Node Nodes =NodesList.item(i);
 					
 					
 					
-						if(n.getNodeType() == Node.ELEMENT_NODE)
+						if(Nodes.getNodeType() == Node.ELEMENT_NODE)
 						{
-							Element lmnt = (Element) n;
+							Element lmnt = (Element) Nodes;
 							NodesL[i] = lmnt.getAttribute("id");
 							convert = lmnt.getElementsByTagName("data").item(0).getTextContent();
 							NodesLI[i] = Integer.parseInt(convert);
@@ -145,14 +145,14 @@ public class Startanalysis {
 		
 	public void AdjacenceMatrix(String x) 
 	{
-		for (int i = 0; i < nl.getLength();i++)
+		for (int i = 0; i < NodesList.getLength();i++)
 		{
-			Node n =nl.item(i);
+			Node Nodes = NodesList.item(i);
 			
-			if(n.getNodeType() == Node.ELEMENT_NODE)
+			if(Nodes.getNodeType() == Node.ELEMENT_NODE)
 			{
 				
-				for(int j = 0; j < nl.getLength();j++) 
+				for(int j = 0; j < NodesList.getLength();j++) 
 				{
 					String src = null;
 					String tgt = null; //Source ,Target Node
@@ -180,7 +180,7 @@ public class Startanalysis {
 			}
 		}
 		
-		printAM();
+		printAdjacenceMatrix();
 	}
 	public int Edge_Weight(String x, String x1 , String x2)
 
@@ -193,13 +193,13 @@ public class Startanalysis {
         DocumentBuilder dB = dBF.newDocumentBuilder();
         Document d = dB.parse(x);
         
-		NodeList el = d.getElementsByTagName("edge"); 
+		NodeList EdgesList = d.getElementsByTagName("edge"); 
 		//Getting the Information from Nodes beginning with "Edge"
 		
-	for(int i = 0; i < el.getLength();i++) 
+	for(int i = 0; i < EdgesList.getLength();i++) 
 	{
 		
-        Node e = el.item(i);
+        Node e = EdgesList.item(i);
 	    Element lmnt1 = (Element) e;
 	    svalue = lmnt1.getElementsByTagName("data").item(1).getTextContent();
 	    value = Integer.parseInt(svalue);
@@ -256,13 +256,13 @@ public class Startanalysis {
 	
 
 
-public void printAM() 
+public void printAdjacenceMatrix() 
 {
-	for (int i = 0; i < nl.getLength();i++) //Printing the adjacency matrix
+	for (int i = 0; i < NodesList.getLength();i++) //Printing the adjacency matrix
 	  {	
 			
-       	for(int j = 0; j < nl.getLength();j++) {
-       		if(j == nl.getLength()-1) {
+       	for(int j = 0; j < NodesList.getLength();j++) {
+       		if(j == NodesList.getLength()-1) {
 				System.out.println(AdjacenceMatrix[i][j]);
 				}
        		else 
