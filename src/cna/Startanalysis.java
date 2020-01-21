@@ -1,12 +1,9 @@
 package cna;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
@@ -18,11 +15,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import java.lang.*;
 
 public class Startanalysis {
-
-	
 
 
 	private JFrame frame;
@@ -71,10 +65,7 @@ public class Startanalysis {
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize(String x) {
-	
 		
-		
-				
 				
 				try {
 				
@@ -82,10 +73,7 @@ public class Startanalysis {
 				DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dB = dBF.newDocumentBuilder();
 				Document d = dB.parse(x);
-				
-				
-				
-				
+
 				
 				NodesList = d.getElementsByTagName("node");
 				NodeList EdgesList = d.getElementsByTagName("edge");
@@ -114,9 +102,7 @@ public class Startanalysis {
 				AdjacenceMatrix(x);
 //				
 //				
-				
-				
-				
+	
 				
 				} catch (ParserConfigurationException parser) {
 					// TODO Auto-generated catch block
@@ -128,21 +114,11 @@ public class Startanalysis {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
-	
+
 	
 	}
-				
-				
-				
-				
-				
-				
-				
-		
-	
-		
+
+
 	public void AdjacenceMatrix(String x) 
 	{
 		for (int i = 0; i < NodesList.getLength();i++)
@@ -169,10 +145,7 @@ public class Startanalysis {
 				    else 
 				    {
 				    	value = Edge_Weight(x,src,tgt);
-				    	AdjacenceMatrix[i][j] = value;
-				    	
-				    	
-				    	
+				    	AdjacenceMatrix[i][j] = value; 	
 				    	
 				    }
 				}
@@ -181,6 +154,17 @@ public class Startanalysis {
 		}
 		
 		printAdjacenceMatrix();
+		
+		Scanner scanner;
+		
+		scanner = new Scanner(System.in);
+		System.out.println("Startnode: ");
+		int startnode = scanner.nextInt();
+		System.out.println("Targetnode: ");
+		int targetnode = scanner.nextInt();
+		
+		Dijkstra algo = new Dijkstra(NodesL);
+		algo.algorithm(AdjacenceMatrix, startnode, targetnode);
 	}
 	public int Edge_Weight(String x, String x1 , String x2)
 
@@ -271,10 +255,6 @@ public void printAdjacenceMatrix()
        		}
 			}
 		}
-		
 
 }
 }
-
-
-//?_?
